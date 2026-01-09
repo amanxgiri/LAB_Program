@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 void evaluatePostfix(char *str)
 {
     for (char *c = str; *c != '\0'; c++)
