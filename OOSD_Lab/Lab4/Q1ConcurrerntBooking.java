@@ -3,7 +3,7 @@ package Lab4;
 class Hotel {
     private int rooms = 2; // total available rooms
 
-    // Booking method
+    // Synchronized Booking Method
     synchronized void bookRoom() {
         while (rooms == 0) {
             System.out.println(Thread.currentThread().getName()
