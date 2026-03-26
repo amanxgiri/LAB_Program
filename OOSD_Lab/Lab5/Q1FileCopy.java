@@ -8,7 +8,7 @@ public class Q1FileCopy {
     public static void main(String[] args) {
         FileInputStream fis = null;
         FileOutputStream fos = null;
-
+        
         try {
             // Open source file and destination file
             fis = new FileInputStream("source.txt");

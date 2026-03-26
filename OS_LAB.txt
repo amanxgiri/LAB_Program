@@ -1,0 +1,1142 @@
+Lab 1
+
+1. Create a folder with your <name>_registrationnumber in the /home folder. Use this folder to save rest of lab exercises. For each lab create a separate folder ex: Lab1, Lab2 … Lab11.
+
+code : 
+cd /home
+mkdir giri_123456
+cd giri_123456
+mkdir Lab1 Lab2 Lab3 Lab4 Lab5 Lab6 Lab7 Lab8 Lab9 Lab10 Lab11
+ls
+
+2.Execute and write output of any 5 important commands explained so far in this manual. Save the output in Lab1_1.txt. Commands and the output should be copied from the command prompt
+
+code: 
+
+pwd
+date
+whoami
+ls
+ps
+
+3. Explore the following commands along with their various options. Save the output in Lab1_2.txt. Commands and the output should be copied from the command prompt.
+a. cat (variation used to create a new file and append to existing file)
+b. head and tail (-n, -c)
+c. cp (-n, -i, -f)
+d. mv (-f, -i) [try (i) mv dir1 dir2 (ii) mv file1 file2 file3 ... directory]
+e. rm (-r, -i, -f)
+f. rmdir (-r, -f)
+g. find (-name, -type)
+
+First create sample files and folders for testing:
+
+cd /home/YourName_RegistrationNumber/Lab1
+mkdir testdir dir1 dir3
+touch file1.txt file2.txt file3.txt sample123 abc9 data
+echo "Line 1" > file1.txt
+echo "Line 2" >> file1.txt
+echo "This is file2" > file2.txt
+echo "Hello World" > file3.txt
+
+A) cat command
+
+Create a new file using cat:
+
+cat > newfile.txt
+This is first line
+This is second line
+Ctrl+D
+
+Display file content:
+
+cat newfile.txt
+
+Append to existing file:
+
+cat >> newfile.txt
+This is appended line
+Ctrl+D
+
+Display again:
+cat newfile.txt
+
+B) head and tail
+
+Create a file with multiple lines:
+seq 1 20 > numbers.txt
+
+First 5 lines:
+head -n 5 numbers.txt
+
+Last 5 lines:
+tail -n 5 numbers.txt
+
+First 10 characters:
+head -c 10 numbers.txt
+
+Last 10 characters:
+tail -c 10 numbers.txt
+
+
+C) cp command
+
+Normal copy:
+
+cp file1.txt copy1.txt
+
+-n do not overwrite:
+
+cp -n file1.txt copy1.txt
+
+-i ask before overwrite:
+
+cp -i file2.txt copy1.txt
+
+-f force overwrite:
+
+cp -f file2.txt copy1.txt
+
+
+D) mv command
+
+Rename a directory:
+mv dir1 dir2
+
+Move multiple files into a directory:
+mkdir dest
+mv file1.txt file2.txt file3.txt dest
+
+-i ask before overwrite:
+mv -i copy1.txt dest
+
+
+E) rm command
+
+Interactive remove:
+
+rm -i abc9
+
+Force remove:
+
+rm -f data
+
+Remove directory recursively:
+
+mkdir tempdir
+touch tempdir/a.txt
+rm -r tempdir
+
+
+F) rmdir command:
+mkdir dirx
+touch dirx/test.txt
+rm -r dirx
+
+G) find command
+
+
+Find by name:
+find . -name "*.txt"
+
+Find only files:
+find . -type f
+
+Find only directories:
+find . -type d
+
+
+4.List all the file names satisfying following criteria:
+a. has the extension .txt
+b. containing at least one digit
+c. having minimum length of 4
+d. does not contain any of the vowels as the start letter
+
+Go inside the folder where files are present:
+
+cd /home/YourName_RegistrationNumber/Lab1
+
+a) Files having extension .txt
+find . -type f -name "*.txt"
+
+b) Files containing at least one digit
+find . -type f | grep '[0-9]'
+
+c) Files having minimum length of 4
+This means filename length is at least 4 characters.
+find . -type f | awk -F/ '{print $NF}' | awk 'length($0) >= 4'
+
+d) Files that do not start with a vowel
+find . -type f | awk -F/ '{print $NF}' | grep -v '^[AEIOUaeiou]'
+
+
+
+==================================================
+
+
+LAB2: 
+
+
+1.Execute all the commands explained in this section and write the output.
+
+answer: 
+cat > data.txt
+apple
+Banana
+cat
+dog
+apple 123
+Zebra
+hello world
+test.
+AB
+xy
+Ctrl+D
+
+code: for grep
+grep "apple" data.txt
+grep '^[A-Z]' data.txt
+
+
+code: for counting lines, couting words
+wc -l data.txt 
+wc -w data.txt
+
+
+code:  sorting data
+sort data.txt
+sort -r data.txt
+
+
+2. Write grep commands to do the following activities:
+To select the lines from a file that have exactly two characters.
+To select the lines from a file that start with the upper case letter.
+To select the lines from a file that end with a period.
+To select the lines in a file that has one or more blank spaces.
+To select the lines in a file and direct them to another file which has digits as one of the characters in that line.
+
+answer: 
+
+Create a sample file for grep commands
+cat > sample.txt
+Hi
+OK
+hello world
+Apple
+this is linux
+End.
+A1 line
+No digits here
+Z.
+AB
+Ctrl+D
+
+
+code solution: 
+
+i) To select the lines from a file that have exactly two characters
+grep '^..$' sample.txt
+ii) To select the lines from a file that start with the upper case letter
+grep '^[A-Z]' sample.txt
+
+iii) To select the lines from a file that end with a period
+grep '\.$' sample.txt
+
+iv) To select the lines in a file that have one or more blank spaces
+grep ' ' sample.txt
+
+v) To select the lines having digits and direct them to another file
+grep '[0-9]' sample.txt > digitLines.txt
+cat digitLines.txt
+
+
+3. Create file studentInformation.txt using vi editor which contains details in the following format:
+RegistrationNo:Name:Department:Branch:Section:Sub1:Sub2:Sub3
+1234:XYZ:ICT:CCE:A:80:60:70
+(add at least 10 rows)
+
+i) Display the number of students belonging to ICT department.
+ii) Replace all occurrences of IT branch with Information Technology and save the output to ITStudents.txt
+iii) Display the average marks of student with the given registration number 1234 (or any specific existing number).
+
+Command:
+vi studentInformation.txt
+
+Press i and type the following:
+RegistrationNo:Name:Department:Branch:Section:Sub1:Sub2:Sub3
+1234:XYZ:ICT:CCE:A:80:60:70
+1235:ABC:ICT:IT:B:75:65:85
+1236:PQR:CSE:IT:A:90:88:84
+1237:LMN:ICT:CCE:C:66:72:60
+1238:DEF:ECE:EC:B:78:82:80
+1239:GHI:ICT:IT:A:69:74:71
+1240:JKL:MECH:ME:C:55:61:58
+1241:MNO:ICT:CCE:B:87:79:91
+1242:STU:CSE:IT:A:73:68:70
+1243:VWX:ICT:CCE:A:81:77:69
+1244:RST:ICT:IT:B:76:72:80
+
+Press Esc and type:
+:wq
+
+i) Display the number of students (only count) belonging to ICT department.
+grep -c ':ICT:' studentInformation.txt
+
+ii) Replace all occurrences of IT branch with Information Technology and save the output to ITStudents.txt
+sed 's/:IT:/:Information Technology:/g' studentInformation.txt > ITStudents.txt
+
+iii) Display the average marks of student with the given registration number 1234 (or any specific existing number).
+awk -F: '$1=="1234" {avg=($6+$7+$8)/3; print "Average marks=", avg}' studentInformation.txt
+
+
+
+
+LAB 3:
+
+1. Write a shell script to find whether a given file is the directory or regular file.
+
+answer: 
+
+File name: filetype.sh
+
+bash code : ---
+echo "Enter file name:"
+read fname
+
+if [ -d "$fname" ]
+then
+    echo "$fname is a directory"
+elif [ -f "$fname" ]
+then
+    echo "$fname is a regular file"
+else
+    echo "$fname does not exist"
+fi
+
+----
+How to run:
+chmod +x filetype.sh
+./filetype.sh
+
+
+2. Write a shell script to list all files (only file names) containing the input pattern (string) in the folder entered by the user.
+
+File name: patternsearch.sh
+
+bash code: 
+echo "Enter folder name:"
+read folder
+
+echo "Enter pattern:"
+read pattern
+
+find "$folder" -type f | while read file
+do
+    if grep -q "$pattern" "$file"
+    then
+        basename "$file"
+    fi
+done
+
+
+How to run:
+chmod +x patternsearch.sh
+./patternsearch.sh
+
+
+
+3. Write a shell script to replace all files with .txt extension with .text in the current directory. This has to be done recursively i.e. if the current folder contains a folder OS with abc.txt then it has to be changed to abc.text.
+
+File name: renameext.sh
+
+bash code: 
+find . -type f -name "*.txt" | while read file
+do
+    newname="${file%.txt}.text"
+    mv "$file" "$newname"
+done
+
+echo "All .txt files renamed to .text"
+
+
+How to run: 
+chmod +x renameext.sh
+./renameext.sh
+
+
+4. Write a shell script to calculate the gross salary.
+GS = Basics + TA + 10% of Basics
+Floating point calculations have to be performed.
+
+answer: 
+File name: salary.sh
+
+bash code: 
+echo "Enter Basic salary:"
+read basic
+
+echo "Enter TA:"
+read ta
+
+gs=$(echo "scale=2; $basic + $ta + (0.10 * $basic)" | bc)
+
+echo "Gross Salary = $gs"
+
+
+How to run:
+chmod +x salary.sh
+./salary.sh
+
+
+6. Write a shell script which deletes all the even numbered lines in a text file
+
+answer: 
+Sample Input File (sample.txt):
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+
+File name: delete_even.sh
+
+bash code: 
+
+echo "Enter file name:"
+read fname
+
+awk 'NR % 2 != 0' "$fname" > temp.txt
+mv temp.txt "$fname"
+
+echo "Even numbered lines deleted successfully"
+
+How to run:
+chmod +x delete_even.sh
+./delete_even.sh
+
+==================================================
+
+
+
+LAB 4: 
+
+1. Write a C program to create a child process. Display different messages in parent process and child process. Display PID and PPID of both parent and child process. Block parent process until child completes using wait system call.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid;
+
+    pid = fork();
+
+    if (pid < 0) {
+        printf("Fork failed\n");
+        return 1;
+    }
+    else if (pid == 0) {
+        // Child process
+        printf("This is child process\n");
+        printf("Child PID  = %d\n", getpid());
+        printf("Child PPID = %d\n", getppid());
+        printf("Child process completed\n");
+        exit(0);
+    }
+    else {
+        // Parent process
+        wait(NULL);   // parent waits until child finishes
+        printf("This is parent process\n");
+        printf("Parent PID  = %d\n", getpid());
+        printf("Parent PPID = %d\n", getppid());
+        printf("Child with PID %d has finished\n", pid);
+    }
+
+    return 0;
+}
+
+2. Write a C program to load the binary executable of the previous program in a child process using exec system call.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        printf("Fork failed\n");
+        return 1;
+    }
+    else if (pid == 0) {
+        printf("Child process created. Executing q1 program...\n");
+        execl("./q1", "q1", NULL);
+
+        // This line executes only if execl fails
+        perror("execl failed");
+        exit(1);
+    }
+    else {
+        wait(NULL);
+        printf("Parent process: child finished execution.\n");
+    }
+
+    return 0;
+}
+
+
+3. Create a zombie (defunct) child process (a child with exit() call, but no corresponding wait() in the sleeping parent) and allow the init process to adopt it (after parent terminates). Run the process as background process and run ps command.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        printf("Fork failed\n");
+        return 1;
+    }
+    else if (pid == 0) {
+        printf("Child process\n");
+        printf("Child PID = %d\n", getpid());
+        printf("Child exiting...\n");
+        exit(0);   // child exits immediately
+    }
+    else {
+        printf("Parent process\n");
+        printf("Parent PID = %d\n", getpid());
+        printf("Sleeping for 20 seconds without wait()...\n");
+        sleep(20);   // child becomes zombie during this time
+        printf("Parent exiting now\n");
+    }
+
+    return 0;
+}
+
+
+How to compile:
+
+gcc q3_zombie.c -o q3
+
+How to run as background:
+
+./q3 &
+
+Check process table:
+
+ps -el | grep q3
+
+or
+
+ps -aux | grep q3
+
+Expected observation:
+
+While parent is sleeping and child has exited, child appears as zombie/defunct.
+Its status may show as Z.
+
+Example output:
+
+[1] 3001
+ps -el | grep q3
+
+Sample Output:
+
+0 Z 1000 3002 3001 0 80 0 - 0 exit pts/0 00:00:00 q3
+0 S 1000 3001 2100 0 80 0 - 1000 hrtime pts/0 00:00:00 q3
+
+After parent exits, the zombie is adopted and cleaned by init/systemd.
+
+
+
+4. Write a multithreaded program that performs different sorting algorithms. The program should work as follows: the user enters on the command line the number of elements to sort and the elements themselves. The program then creates separate threads, each using a different sorting algorithm. Each thread sorts the array using its corresponding algorithm and displays the time taken to produce the result. The main thread waits for all threads to finish and then displays the final sorted array.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct {
+    int *arr;
+    int n;
+    char name[20];
+} SortData;
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int min = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min])
+                min = j;
+        }
+        int temp = arr[i];
+        arr[i] = arr[min];
+        arr[min] = temp;
+    }
+}
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+void *sortThread(void *arg) {
+    SortData *data = (SortData *)arg;
+    clock_t start, end;
+    double time_taken;
+
+    start = clock();
+
+    if (strcmp(data->name, "Bubble") == 0)
+        bubbleSort(data->arr, data->n);
+    else if (strcmp(data->name, "Selection") == 0)
+        selectionSort(data->arr, data->n);
+    else if (strcmp(data->name, "Insertion") == 0)
+        insertionSort(data->arr, data->n);
+
+    end = clock();
+    time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+    printf("%s Sort Result: ", data->name);
+    printArray(data->arr, data->n);
+    printf("%s Sort Time Taken: %f seconds\n", data->name, time_taken);
+
+    pthread_exit(NULL);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 3) {
+        printf("Usage: %s <n> <elements>\n", argv[0]);
+        return 1;
+    }
+
+    int n = atoi(argv[1]);
+
+    if (argc != n + 2) {
+        printf("Please enter exactly %d elements.\n", n);
+        return 1;
+    }
+
+    int *original = (int *)malloc(n * sizeof(int));
+    int *arr1 = (int *)malloc(n * sizeof(int));
+    int *arr2 = (int *)malloc(n * sizeof(int));
+    int *arr3 = (int *)malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        original[i] = atoi(argv[i + 2]);
+        arr1[i] = original[i];
+        arr2[i] = original[i];
+        arr3[i] = original[i];
+    }
+
+    pthread_t t1, t2, t3;
+
+    SortData d1 = {arr1, n, "Bubble"};
+    SortData d2 = {arr2, n, "Selection"};
+    SortData d3 = {arr3, n, "Insertion"};
+
+    pthread_create(&t1, NULL, sortThread, &d1);
+    pthread_create(&t2, NULL, sortThread, &d2);
+    pthread_create(&t3, NULL, sortThread, &d3);
+
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+    pthread_join(t3, NULL);
+
+    printf("Final Sorted Array (using Bubble result): ");
+    printArray(arr1, n);
+
+    free(original);
+    free(arr1);
+    free(arr2);
+    free(arr3);
+
+    return 0;
+}
+
+How to compile and run:
+gcc q4_multisort.c -o q4 -lpthread
+./q4 5 64 34 25 12 22
+
+
+
+5. Write multithreaded program that generates the Fibonacci series. The program should work as follows: The user will enter on the command line the number of Fibonacci numbers that the program is to generate. The program then will create a separate thread that will generate the Fibonacci numbers, placing the sequence in data that is shared by the threads. When the thread finishes execution the parent will output the sequence generated by the child thread. Because the parent thread cannot begin outputting the Fibonacci sequence until the child thread finishes, this will require having the parent thread wait for the child thread to finish.
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+int *fib;
+int n;
+
+void *generateFib(void *arg) {
+    if (n >= 1)
+        fib[0] = 0;
+    if (n >= 2)
+        fib[1] = 1;
+
+    for (int i = 2; i < n; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+
+    pthread_exit(NULL);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Usage: %s <number_of_terms>\n", argv[0]);
+        return 1;
+    }
+
+    n = atoi(argv[1]);
+
+    if (n <= 0) {
+        printf("Enter a positive number\n");
+        return 1;
+    }
+
+    fib = (int *)malloc(n * sizeof(int));
+    pthread_t tid;
+
+    pthread_create(&tid, NULL, generateFib, NULL);
+    pthread_join(tid, NULL);
+
+    printf("Fibonacci Series: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", fib[i]);
+    }
+    printf("\n");
+
+    free(fib);
+    return 0;
+}
+
+
+How to compile and run:
+gcc q5_fibonacci_thread.c -o q5 -lpthread
+./q5 10
+
+==================================================
+
+
+
+LAB 5: 
+
+1. Question:
+
+
+Consider the following set of processes, with length of the CPU burst given in milliseconds:
+
+Process	Arrival Time	Burst Time	Priority
+P1		0		60	3
+P2		3		30	2
+P3		4		40	1
+P4		9		10	4
+
+Write a menu-driven C program to simulate the following CPU scheduling algorithms.
+
+Display the Gantt chart showing the order of execution of each process.
+Compute waiting time and turnaround time for each process.
+Hence, compute average waiting time and average turnaround time.
+
+
+1. FCFS
+
+FCFS
+File name: fcfs.c
+==================================================
+
+#include <stdio.h>
+
+int main() {
+    int n = 4;
+    char p[4][3] = {"P1", "P2", "P3", "P4"};
+    int at[4] = {0, 3, 4, 9};
+    int bt[4] = {60, 30, 40, 10};
+    int ct[4], tat[4], wt[4];
+
+    int start[4], end[4];
+    int time = 0;
+    float avg_tat = 0, avg_wt = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (time < at[i])
+            time = at[i];
+
+        start[i] = time;
+        time += bt[i];
+        end[i] = time;
+        ct[i] = time;
+    }
+
+    for (int i = 0; i < n; i++) {
+        tat[i] = ct[i] - at[i];
+        wt[i] = tat[i] - bt[i];
+        avg_tat += tat[i];
+        avg_wt += wt[i];
+    }
+
+    printf("\nFCFS Scheduling\n");
+
+    printf("\nGantt Chart:\n");
+    for (int i = 0; i < n; i++) printf("--------");
+    printf("-\n|");
+    for (int i = 0; i < n; i++) printf("  %s  |", p[i]);
+    printf("\n");
+    for (int i = 0; i < n; i++) printf("--------");
+    printf("-\n");
+
+    printf("%d", start[0]);
+    for (int i = 0; i < n; i++) printf("      %d", end[i]);
+    printf("\n");
+
+    printf("\n%-10s %-10s %-10s %-15s %-15s %-12s\n",
+           "Process", "AT", "BT", "CT", "TAT", "WT");
+
+    for (int i = 0; i < n; i++) {
+        printf("%-10s %-10d %-10d %-15d %-15d %-12d\n",
+               p[i], at[i], bt[i], ct[i], tat[i], wt[i]);
+    }
+
+    printf("\nAverage Turnaround Time = %.2f\n", avg_tat / n);
+    printf("Average Waiting Time    = %.2f\n", avg_wt / n);
+
+    return 0;
+}
+
+
+==================================================
+2. SRTF
+
+
+#include <stdio.h>
+#include <limits.h>
+#include <string.h>
+
+struct Gantt {
+    char pid[3];
+    int start;
+    int end;
+};
+
+int main() {
+    int n = 4;
+    char p[4][3] = {"P1", "P2", "P3", "P4"};
+    int at[4] = {0, 3, 4, 9};
+    int bt[4] = {60, 30, 40, 10};
+    int rt[4], ct[4] = {0}, tat[4], wt[4];
+
+    struct Gantt g[100];
+    int gcount = 0;
+
+    for (int i = 0; i < n; i++) rt[i] = bt[i];
+
+    int completed = 0, time = 0, prev = -1;
+    float avg_tat = 0, avg_wt = 0;
+
+    while (completed < n) {
+        int idx = -1;
+        int min_rt = INT_MAX;
+
+        for (int i = 0; i < n; i++) {
+            if (at[i] <= time && rt[i] > 0) {
+                if (rt[i] < min_rt) {
+                    min_rt = rt[i];
+                    idx = i;
+                }
+                else if (rt[i] == min_rt) {
+                    if (at[i] < at[idx]) idx = i;
+                }
+            }
+        }
+
+        if (idx == -1) {
+            time++;
+            continue;
+        }
+
+        if (prev != idx) {
+            strcpy(g[gcount].pid, p[idx]);
+            g[gcount].start = time;
+            if (gcount > 0) g[gcount - 1].end = time;
+            gcount++;
+        }
+
+        rt[idx]--;
+        time++;
+        prev = idx;
+
+        if (rt[idx] == 0) {
+            ct[idx] = time;
+            completed++;
+        }
+    }
+
+    if (gcount > 0) g[gcount - 1].end = time;
+
+    for (int i = 0; i < n; i++) {
+        tat[i] = ct[i] - at[i];
+        wt[i] = tat[i] - bt[i];
+        avg_tat += tat[i];
+        avg_wt += wt[i];
+    }
+
+    printf("\nSRTF Scheduling\n");
+
+    printf("\nGantt Chart:\n");
+    for (int i = 0; i < gcount; i++) printf("--------");
+    printf("-\n|");
+    for (int i = 0; i < gcount; i++) printf("  %s  |", g[i].pid);
+    printf("\n");
+    for (int i = 0; i < gcount; i++) printf("--------");
+    printf("-\n");
+
+    printf("%d", g[0].start);
+    for (int i = 0; i < gcount; i++) printf("      %d", g[i].end);
+    printf("\n");
+
+    printf("\n%-10s %-10s %-10s %-15s %-15s %-12s\n",
+           "Process", "AT", "BT", "CT", "TAT", "WT");
+
+    for (int i = 0; i < n; i++) {
+        printf("%-10s %-10d %-10d %-15d %-15d %-12d\n",
+               p[i], at[i], bt[i], ct[i], tat[i], wt[i]);
+    }
+
+    printf("\nAverage Turnaround Time = %.2f\n", avg_tat / n);
+    printf("Average Waiting Time    = %.2f\n", avg_wt / n);
+
+    return 0;
+}
+
+==================================================
+3. Round Robin
+
+#include <stdio.h>
+#include <string.h>
+
+struct Gantt {
+    char pid[3];
+    int start;
+    int end;
+};
+
+int main() {
+    int n = 4, tq = 10;
+    char p[4][3] = {"P1", "P2", "P3", "P4"};
+    int at[4] = {0, 3, 4, 9};
+    int bt[4] = {60, 30, 40, 10};
+    int rt[4], ct[4] = {0}, tat[4], wt[4];
+    int visited[4] = {0};
+
+    int q[100], front = 0, rear = 0;
+    struct Gantt g[100];
+    int gcount = 0;
+
+    for (int i = 0; i < n; i++) rt[i] = bt[i];
+
+    int time = 0, completed = 0;
+    float avg_tat = 0, avg_wt = 0;
+
+    while (completed < n) {
+        for (int i = 0; i < n; i++) {
+            if (!visited[i] && at[i] <= time) {
+                q[rear++] = i;
+                visited[i] = 1;
+            }
+        }
+
+        if (front == rear) {
+            time++;
+            continue;
+        }
+
+        int idx = q[front++];
+
+        strcpy(g[gcount].pid, p[idx]);
+        g[gcount].start = time;
+
+        if (rt[idx] > tq) {
+            time += tq;
+            rt[idx] -= tq;
+        } else {
+            time += rt[idx];
+            rt[idx] = 0;
+            ct[idx] = time;
+            completed++;
+        }
+
+        g[gcount].end = time;
+        gcount++;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i] && at[i] <= time) {
+                q[rear++] = i;
+                visited[i] = 1;
+            }
+        }
+
+        if (rt[idx] > 0) {
+            q[rear++] = idx;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        tat[i] = ct[i] - at[i];
+        wt[i] = tat[i] - bt[i];
+        avg_tat += tat[i];
+        avg_wt += wt[i];
+    }
+
+    printf("\nRound Robin Scheduling (Time Quantum = 10)\n");
+
+    printf("\nGantt Chart:\n");
+    for (int i = 0; i < gcount; i++) printf("--------");
+    printf("-\n|");
+    for (int i = 0; i < gcount; i++) printf("  %s  |", g[i].pid);
+    printf("\n");
+    for (int i = 0; i < gcount; i++) printf("--------");
+    printf("-\n");
+
+    printf("%d", g[0].start);
+    for (int i = 0; i < gcount; i++) printf("      %d", g[i].end);
+    printf("\n");
+
+    printf("\n%-10s %-10s %-10s %-15s %-15s %-12s\n",
+           "Process", "AT", "BT", "CT", "TAT", "WT");
+
+    for (int i = 0; i < n; i++) {
+        printf("%-10s %-10d %-10d %-15d %-15d %-12d\n",
+               p[i], at[i], bt[i], ct[i], tat[i], wt[i]);
+    }
+
+    printf("\nAverage Turnaround Time = %.2f\n", avg_tat / n);
+    printf("Average Waiting Time    = %.2f\n", avg_wt / n);
+
+    return 0;
+}
+
+
+==================================================
+4. Non-preemptive priority
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int n = 4;
+    char p[4][3] = {"P1", "P2", "P3", "P4"};
+    int at[4] = {0, 3, 4, 9};
+    int bt[4] = {60, 30, 40, 10};
+    int pr[4] = {3, 2, 1, 4};
+    int ct[4] = {0}, tat[4], wt[4], done[4] = {0};
+
+    char gantt_pid[10][3];
+    int start[10], end[10], gcount = 0;
+
+    int completed = 0, time = 0;
+    float avg_tat = 0, avg_wt = 0;
+
+    while (completed < n) {
+        int idx = -1;
+        int highest = -1;
+
+        for (int i = 0; i < n; i++) {
+            if (!done[i] && at[i] <= time) {
+                if (pr[i] > highest) {
+                    highest = pr[i];
+                    idx = i;
+                } else if (pr[i] == highest) {
+                    if (at[i] < at[idx]) idx = i;
+                }
+            }
+        }
+
+        if (idx == -1) {
+            time++;
+            continue;
+        }
+
+        strcpy(gantt_pid[gcount], p[idx]);
+        start[gcount] = time;
+        time += bt[idx];
+        end[gcount] = time;
+        gcount++;
+
+        ct[idx] = time;
+        done[idx] = 1;
+        completed++;
+    }
+
+    for (int i = 0; i < n; i++) {
+        tat[i] = ct[i] - at[i];
+        wt[i] = tat[i] - bt[i];
+        avg_tat += tat[i];
+        avg_wt += wt[i];
+    }
+
+    printf("\nNon-Preemptive Priority Scheduling\n");
+    printf("(Higher number = Higher priority)\n");
+
+    printf("\nGantt Chart:\n");
+    for (int i = 0; i < gcount; i++) printf("--------");
+    printf("-\n|");
+    for (int i = 0; i < gcount; i++) printf("  %s  |", gantt_pid[i]);
+    printf("\n");
+    for (int i = 0; i < gcount; i++) printf("--------");
+    printf("-\n");
+
+    printf("%d", start[0]);
+    for (int i = 0; i < gcount; i++) printf("      %d", end[i]);
+    printf("\n");
+
+    printf("\n%-10s %-10s %-10s %-15s %-15s %-12s\n",
+           "Process", "AT", "BT", "CT", "TAT", "WT");
+
+    for (int i = 0; i < n; i++) {
+        printf("%-10s %-10d %-10d %-15d %-15d %-12d\n",
+               p[i], at[i], bt[i], ct[i], tat[i], wt[i]);
+    }
+
+    printf("\nAverage Turnaround Time = %.2f\n", avg_tat / n);
+    printf("Average Waiting Time    = %.2f\n", avg_wt / n);
+
+    return 0;
+}
